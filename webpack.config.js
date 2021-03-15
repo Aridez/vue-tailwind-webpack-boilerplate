@@ -42,7 +42,6 @@ module.exports = {
             template: path.resolve(__dirname, 'public/index.html')
         }),
         new MiniCssExtractPlugin(),
-        new CssMinimizerPlugin(),
     ],
     devServer: {
         watchContentBase: true,
@@ -50,5 +49,12 @@ module.exports = {
         writeToDisk: true,
         inline: false,
     },
+    optimization: {
+        minimizer: [
+          // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+          '...',
+          new CssMinimizerPlugin(),
+        ],
+      },
 
 }
