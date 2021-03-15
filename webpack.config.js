@@ -47,7 +47,6 @@ module.exports = {
         watchContentBase: true,
         open: true,
         writeToDisk: true,
-        inline: false,
     },
     optimization: {
         minimizer: [
