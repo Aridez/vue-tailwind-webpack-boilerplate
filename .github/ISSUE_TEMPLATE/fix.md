@@ -2,12 +2,12 @@
 name: Fix
 about: Minor corrections of the project or its documentation
 title: ''
-labels: ''
+labels: fix
 assignees: ''
 
 ---
 
-**Describe this fix**
+**Describe the reason of this fix**
 [Describe the reason for this fix e.g. "Users can't locate the new send button"]
 
 ---
