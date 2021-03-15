@@ -337,19 +337,43 @@ npm install -D mini-css-extract-plugin
 
 #### Related webpack configuration
 
-In this case just importing and adding the plugin is enough to set it up:
+Following the docs above we only need to configure the CssMinimizerPlugin as an additional optimization step:
 
 ```js
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     // other config
-    plugins: [
-        // other plugins
-        new CssMinimizerPlugin(),
-    ],
+    optimization: {
+        minimizer: [
+          // For webpack@5 you can use the `...` syntax to extend existing minimizers
+          '...',
+          new CssMinimizerPlugin(),
+        ],
+      },
 }
 ```
+
+Since webpack version >4, the optimizations are set automatically for you, but they can be extended this way. Webpack includes `webpack-terser-plugin` by default in order to minify the `.js` files too. For this reason we want to make sure to uncomment the `'...'` part so the rest of the optimization steps provided by webpack are left as is. The configuration above would be *similar* to the following (*note that webpack takes more optimization steps in addition to minifying the `.js` files*):
+
+```js
+// This serves just as an example, webpack provides more optimization steps when using '...'
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
+
+module.exports = {
+    // other config
+    optimization: {
+        minimizer: [
+          // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+          new TerserPlugin(),
+          new CssMinimizerPlugin(),
+        ],
+      },
+}
+```
+
+> 📝 **_NOTE:_** In the docs you can see the `minimize: true` option. This is also set depending on whether you are running in development or productio mode. In this project, the mode is defined through the `--mode` flag on the `package.json` commands and there is no need to include the `minimize` option.
 
 ### Setting up FontAwesome for our icons
 
