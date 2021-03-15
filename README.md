@@ -269,7 +269,6 @@ In order to use the development server, we first need to configure a few fields:
   - **watchContentBase:** When enabled, it will look for changes on the `entry` file and its dependencies and will trigger a full page reload if it finds any
   - **open:** Tells dev-server to open the browser after server had been started.
   - **writeToDisk:** Tells devServer to write generated assets to the disk.
-  - **inline:** By default, when running the dev server, a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console. By setting this option to false we obtain a closer result to what our live app would look like.
 
 ```js
 const path = require('path')
@@ -280,7 +279,6 @@ module.exports = {
         watchContentBase: true,
         open: true,
         writeToDisk: true,
-        inline: false
     },
 }
 ```
