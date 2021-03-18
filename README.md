@@ -237,7 +237,6 @@ In order to configure purgeCSS, we will use the built in system tailwind comes w
 ```js
 module.exports = {
   purge: {
-    enabled: true,
     content: [
       './src/**/*.html',
       './src/**/*.vue',
@@ -249,7 +248,7 @@ module.exports = {
 }
 ```
 
-> 📝 **_NOTE:_** It seems that there is some kind of problem with the module environment variable where it is not being set correctly and this prevents purgeCSS from actually processing the files. To solve this we added `enabled : true` to force purgeCSS to go through regardless of the environment.
+> 📝 **_NOTE:_** PurgeCSS will not run when we are in development mode. This allows to have shorter build times and allows to tweak the code from the developer console using new classes. This is controlled through the `process.env.NODE_ENV` variable, that is set in our `package.json` through the `--node-env` flag ([more info](https://github.com/webpack/webpack-cli/issues/2362)).
 
 ### Setting up a webpack dev server
 
