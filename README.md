@@ -31,6 +31,7 @@ To get started simply install the project using `npm install` and use the follow
 
 - `npm run serve:dev` to serve the project locally using the development build
 - `npm run serve:prod` to serve the project locally using the production build
+- `npm run build:dev` to build the project in development mode, the output will be saved in 📂dist. Good to test the development build files generated or to work using an extension like [live server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 - `npm run build:prod` to build the project in production mode, the output will be saved in 📂dist. Run this command before putting the application live.
 
 
