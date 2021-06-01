@@ -1,21 +1,21 @@
 <template>
-  <div class="flex flex-col h-full w-full bg-white px-4 py-6">
-    <div class="flex flex-row items-center py-4 px-6 rounded-2xl shadow">
+  <div class="flex flex-col h-full w-full bg-white dark:bg-gray-900 px-4 py-6">
+    <div class="flex flex-row items-center py-4 px-6 rounded-2xl border dark:border-gray-700">
       <div
         class="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-100"
       >
         T
       </div>
       <div class="flex flex-col ml-3">
-        <div class="font-semibold text-sm">UI Art Design</div>
-        <div class="text-xs text-gray-500">Active</div>
+        <div class="font-semibold text-sm dark:text-white">UI Art Design</div>
+        <div class="text-xs text-gray-400">Active</div>
       </div>
       <div class="ml-auto">
         <ul class="flex flex-row items-center space-x-2">
           <li>
             <a
               href="#"
-              class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full"
+              class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white"
             >
               <span>
                 <font-awesome-icon :icon="['fas', 'phone']" />
@@ -25,7 +25,7 @@
           <li>
             <a
               href="#"
-              class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full"
+              class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white"
             >
               <span>
                 <font-awesome-icon :icon="['fas', 'video']" />
@@ -35,7 +35,7 @@
           <li>
             <a
               href="#"
-              class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full"
+              class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white"
             >
               <span>
                 <font-awesome-icon :icon="['fas', 'ellipsis-v']" />
@@ -56,7 +56,7 @@
                 A
               </div>
               <div
-                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl dark:bg-gray-800 dark:text-white"
               >
                 <div>Hey How are you today?</div>
               </div>
@@ -70,7 +70,7 @@
                 A
               </div>
               <div
-                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl dark:bg-gray-800 dark:text-white"
               >
                 <div>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel
@@ -88,7 +88,7 @@
                 A
               </div>
               <div
-                class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl dark:bg-blue-900 dark:text-white"
               >
                 <div>I'm ok what about you?</div>
               </div>
@@ -102,7 +102,7 @@
                 A
               </div>
               <div
-                class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl dark:bg-blue-900 dark:text-white"
               >
                 <div>
                   Lorem ipsum dolor sit, amet consectetur adipisicing. ?
@@ -118,7 +118,7 @@
                 A
               </div>
               <div
-                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl dark:bg-gray-800 dark:text-white"
               >
                 <div>Lorem ipsum dolor sit amet !</div>
               </div>
@@ -132,13 +132,13 @@
                 A
               </div>
               <div
-                class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                class="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl dark:bg-gray-800 dark:text-white dark:bg-blue-900 dark:text-white"
               >
                 <div>
                   Lorem ipsum dolor sit, amet consectetur adipisicing. ?
                 </div>
                 <div
-                  class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"
+                  class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-400"
                 >
                   Seen
                 </div>
@@ -153,7 +153,7 @@
                 A
               </div>
               <div
-                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl dark:bg-gray-800 dark:text-white"
               >
                 <div>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -167,28 +167,28 @@
     </div>
     <div class="flex flex-row items-center">
       <div
-        class="flex flex-row items-center w-full border rounded-3xl h-12 px-2"
+        class="flex flex-row items-center w-full border rounded-3xl h-12 px-2 dark:border-gray-700"
       >
         <button
-          class="flex items-center justify-center h-10 w-10 text-gray-400 ml-1"
+          class="flex items-center justify-center h-10 w-10 text-gray-400 ml-1 hover:text-gray-500 focus:outline-none"
         >
           <font-awesome-icon :icon="['fas', 'microphone']" />
         </button>
         <div class="w-full">
           <input
             type="text"
-            class="border border-transparent w-full focus:outline-none text-sm h-10 flex items-center"
+            class="border border-transparent w-full focus:focus:outline-none text-sm h-10 flex items-center dark:bg-gray-900 dark:text-white focus:outline-none"
             placeholder="Type your message...."
           />
         </div>
         <div class="flex flex-row">
           <button
-            class="flex items-center justify-center h-10 w-8 text-gray-400"
+            class="flex items-center justify-center h-10 w-8 text-gray-400 hover:text-gray-500 focus:outline-none"
           >
             <font-awesome-icon :icon="['fas', 'paperclip']" />
           </button>
           <button
-            class="flex items-center justify-center h-10 w-8 text-gray-400 ml-1 mr-2"
+            class="flex items-center justify-center h-10 w-8 text-gray-400 ml-1 mr-2 hover:text-gray-500 focus:outline-none"
           >
             <font-awesome-icon :icon="['far', 'image']" />
           </button>
@@ -196,7 +196,7 @@
       </div>
       <div class="ml-6">
         <button
-          class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-200 hover:bg-gray-300 text-indigo-800 text-white"
+          class="flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-400 h-10 w-10 rounded-full dark:bg-gray-600 dark:hover:bg-gray-700 dark:text-white focus:outline-none"
         >
           <font-awesome-icon :icon="['fas', 'paper-plane']" />
         </button>
