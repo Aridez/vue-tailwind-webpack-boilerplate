@@ -23,6 +23,7 @@ This boilerplate provides the a simple setup needed to create development and pr
     - [Related webpack configuration](#related-webpack-configuration-5)
   - [Setting up FontAwesome for our icons](#setting-up-fontawesome-for-our-icons)
     - [Configuring font awesome](#configuring-font-awesome)
+  - [Setting up dark mode with Tailwind.css](#setting-up-dark-mode-with-tailwindcss)
   - [Other](#other)
 
 ### Quickstart
@@ -426,6 +427,48 @@ export default {
 > 📝 **_NOTE:_**  I recommend going through the [docs](https://github.com/FortAwesome/vue-fontawesome#the-icon-property) if you've never used font awesome before and you can also search for icons [here](https://fontawesome.com/icons?d=gallery&p=2).
 
 > 📝 **_NOTE:_** There are two things to look our for when using fontAwesome. The first thins is that, while the import name is in `camelCase`, the element itself will use `kebab-case`. The second thing is that you need to make sure that you are using the right prefix (fas for solid, far for regular and fab for brands).
+
+### Setting up dark mode with Tailwind.css
+
+Dark mode support comes built-in with `Tailwind.css` making things much easier to set up ([docs](https://tailwindcss.com/docs/dark-mode)). This mode is disabled by default in order to keep the size at a minimum and needs to be enabled on the `tailwind.config.js` file by setting the `darkMode` option:
+
+`tailwind.config.js`
+```js
+module.exports = {
+  purge: {
+    content: [
+      './src/**/*.html',
+      './src/**/*.vue',
+      './src/*.js',
+      './src/*.vue',
+    ]
+  },
+  darkMode: 'class', // or 'media' or false
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Since we want to toggle the dark mode manually through the use of a class we will set the `darkMode` option to `class`. Then on our root element we will set that class dynamically when the user clicks on the moon icon at the bottom-left corner:
+
+`src/App.vue`
+```xml
+<template>
+  <div :class="{ dark: isDarkModeActive }">
+    <div class="flex flex-row h-screen antialiased text-gray-800">
+      <Sidebar @toggle-dark-mode="isDarkModeActive = !isDarkModeActive" />
+      <Chat />
+    </div>
+  </div>
+</template>
+```
+
+Using this approach, we will receive an event from the `Sidebar.vue` component (where the moon button is) that will toggle the `isDarkModeActive` variable to activate the `dark` class conditionally, applying the styles on all the page accordingly.
 
 ### Other
 
