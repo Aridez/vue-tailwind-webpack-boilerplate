@@ -24,6 +24,8 @@ This boilerplate provides the a simple setup needed to create development and pr
   - [Setting up FontAwesome for our icons](#setting-up-fontawesome-for-our-icons)
     - [Configuring font awesome](#configuring-font-awesome)
   - [Setting up dark mode with Tailwind.css](#setting-up-dark-mode-with-tailwindcss)
+  - [Troubleshooting](#troubleshooting)
+    - [Upgrade version](#upgrade-version)
   - [Other](#other)
 
 ### Quickstart
@@ -469,6 +471,19 @@ Since we want to toggle the dark mode manually through the use of a class we wil
 ```
 
 Using this approach, we will receive an event from the `Sidebar.vue` component (where the moon button is) that will toggle the `isDarkModeActive` variable to activate the `dark` class conditionally, applying the styles on all the page accordingly.
+
+### Troubleshooting
+
+If you are finding any trouble with this project, you can try one of the following methods to try and solve any issues you may be facing:
+
+#### Upgrade version
+
+Having older versions of NPM and node may throw errors. This project has been tested with the following minimum verions ([ref](https://github.com/Aridez/vue-tailwind-webpack-boilerplate/issues/34)):
+
+- Node: 15.6.0
+- NPM: 7.4.0
+
+If your project works with previous of Node or NPM [open an issue](https://github.com/Aridez/vue-tailwind-webpack-boilerplate/issues) to fix this section.
 
 ### Other
 
