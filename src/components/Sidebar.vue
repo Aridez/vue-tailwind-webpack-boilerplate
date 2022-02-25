@@ -166,6 +166,7 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { faComments, faMoon } from "@fortawesome/free-regular-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 export default {
   name: "HelloWorld",
@@ -179,7 +180,7 @@ export default {
     },
   },
   beforeCreate() {
-    this.$library.add(
+    library.add(
       faComments,
       faHome,
       faCommentDots,

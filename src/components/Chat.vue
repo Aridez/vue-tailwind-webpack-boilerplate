@@ -215,6 +215,7 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 export default {
   name: "HelloWorld",
@@ -223,7 +224,7 @@ export default {
     return {};
   },
   beforeCreate() {
-    this.$library.add(
+    library.add(
       faPaperPlane,
       faImage,
       faPaperclip,
