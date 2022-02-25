@@ -1,6 +1,6 @@
-## Vue + tailwind + webpack boilerplate
+# Vue + tailwind + webpack boilerplate
 
-This boilerplate provides the a simple setup needed to create development and production environments to create Vue apps using tailwind and building them into production with Webpack. Everything is explained step by step so you can understand what is going on and use this as the base to start building your own apps. Every step of the setup is fully explained and documented.
+This boilerplate provides the a simple setup needed to create development and production environments for Vue 3 apps using Tailwind and FontAwesome, building them afterwards into production with Webpack. Everything is explained step by step, to better understand what is going on, so it is easy to use this as the base to start building your own apps. Every step of the setup is fully explained and documented.
 
 - [Vue + tailwind + webpack boilerplate](#vue--tailwind--webpack-boilerplate)
   - [Quickstart](#quickstart)
@@ -14,7 +14,6 @@ This boilerplate provides the a simple setup needed to create development and pr
   - [Installing tailwind](#installing-tailwind)
     - [Related webpack configuration](#related-webpack-configuration-2)
     - [Configuring tailwind](#configuring-tailwind)
-    - [Configuring tailwind's purgeCSS](#configuring-tailwinds-purgecss)
   - [Setting up a webpack dev server](#setting-up-a-webpack-dev-server)
     - [Related webpack configuration](#related-webpack-configuration-3)
   - [Setting up MiniCssExtractPlugin](#setting-up-minicssextractplugin)
@@ -28,7 +27,7 @@ This boilerplate provides the a simple setup needed to create development and pr
     - [Upgrade version](#upgrade-version)
   - [Other](#other)
 
-### Quickstart
+## Quickstart
 
 To get started simply install the project using `npm install` and use the following commands:
 
@@ -39,12 +38,12 @@ To get started simply install the project using `npm install` and use the follow
 
 
 
-### Folder structure
+## Folder structure
 
 ```shell
 .
 ├── 📂dist                    # Distribution folder, contains your latest build
-├── 📂node_modules            # Test files (alternatively `spec` or `tests`)
+├── 📂node_modules            # Node dependencies
 ├── 📂public                  # Contains the index.html template
 ├── 📂src                     # Source code of the application
 │   ├── 📂assets              # Any assets used by the application (images, fonts...)
@@ -59,19 +58,19 @@ To get started simply install the project using `npm install` and use the follow
 └── ⚙️webpack.config.js       # Main webpack's configuration file
 ```
 
-### Installing vue
+## Installing vue
 
-The first thing is to install the vue library. to do so simply run the following command:
+The first thing is to [install Vue 3](https://vuejs.org/guide/introduction.html) running the following command:
 
 ```shell
 npm install vue
 ``` 
 
-This will install the latest stable version of Vue ([docs](https://vuejs.org/v2/guide/installation.html#NPM))
+> 📝 **_NOTE:_**  If Vue 3 is not yet the main release use the command `npm install vue@latest`
 
-### Installing webpack
+## Installing webpack
 
-Next thing we will install webpack. From now on all dependencies are used only during development so they will all include the `-D` flag.
+Next thing is to install webpack. From now on all dependencies are used only during development so they will all include the `-D` flag.
 
 ```shell
 npm install -D webpack webpack-cli
@@ -82,25 +81,26 @@ npm install -D webpack webpack-cli
 
 > 📝 **_NOTE:_**  The CLI is linked inside the `node_modules/.bin` folder. This means that you won't be able to use `webpack` normally through the console but your scripts inside `package.json` will access it without issue.
 
-> 📝 **_NOTE:_** You can still access the `webpack` command using the `npx` command shipped with Node 8.2/npm 5.2.0. You can try to run `npx webpack --version` to check if the command works and the installed dependencies versions.
+> 📝 **_NOTE:_** You can still access the `webpack` commands using the `npx` command shipped with Node 8.2/npm 5.2.0. You can try to run `npx webpack --version` to check if the command works and see the installed dependencies versions.
 
-### Installing Vue-loader
+## Installing Vue-loader
 
 Vue loader is a [webpack loader](https://webpack.js.org/concepts/loaders/) that allows us to process Single-File Components (SFC). ([docs](https://vue-loader.vuejs.org/guide/#manual-setup))
 
 ```shell
-npm install -D vue-loader vue-template-compiler style-loader
+npm install -D vue-loader vue-template-compiler style-loader css-loader 
 ```
 
 - **vue-loader:** This installs the main vue-loader functionalities
 - **vue-template-compiler:** The vue-template-compiler has two primary functions: converting templates to render() functions and parsing single file componens.
 - **style-loader:** Adds CSS to the DOM by injecting a \<style\> tag ([docs](https://github.com/webpack-contrib/style-loader))
+- **css-loader:** Gives you more control over importing .css files. ([docs](https://webpack.js.org/loaders/css-loader/))
 
 > 📝 **_NOTE:_** On the docs it is mentioned to use the `vue-style-loader` but this loader is not well maintained. Instead we will use the `style-loader` provided by webpack.
 
-> 📝 **_NOTE:_** In the webpack configuration we will be using `css-loader` ([docs](https://webpack.js.org/loaders/css-loader/)) too although there is no need to import it on our project since it was importes as a dependency by `vue-loader`
+> 📝 **_NOTE:_** We need to import `css-loader` since it is not a dependency of `vue-loader` anymore.
 
-#### Related webpack configuration
+### Related webpack configuration
 
 ```js
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
@@ -130,7 +130,7 @@ module.exports = {
 }
 ```
 
-### Installing html-webpack-plugin
+## Installing html-webpack-plugin
 
 This plugin will create and dynamically inject the dependencies of our application into the main HTML file. ([docs](https://webpack.js.org/plugins/html-webpack-plugin/))
 
@@ -138,9 +138,9 @@ This plugin will create and dynamically inject the dependencies of our applicati
 npm install --save-dev html-webpack-plugin
 ```
 
-Since the HTML file created needs to have a \<div id="app"\> tag to load our Vue components in, we will be using a template located in `public/index.html`.
+Since the HTML file created needs to have a `\<div id="app"\>` tag to load our Vue components in, we will be using a template located in `public/index.html`.
 
-#### Related webpack configuration
+### Related webpack configuration
 
 ```js
 const path = require('path')
@@ -155,21 +155,21 @@ module.exports = {
 }
 ```
 
-### Installing tailwind
+## Installing tailwind
 
 Now we will install the `tailwindCSS` library for our CSS styling on the page ([docs](https://tailwindcss.com/docs/installation))
 
 ```shell
-npm install -D tailwindcss postcss-loader postcss
+npm install -D tailwindcss postcss autoprefixer postcss-import postcss-loader
 ```
 
 - **tailwindcss:** Installs the main tailwind functionalities
-- **postcss-loader:** A webpack loader to process CSS with PostCSS ([docs](https://webpack.js.org/loaders/postcss-loader/))
 - **postcss:** A tool for transforming styles with JS plugins. These plugins can lint your CSS, support variables and mixins, transpile future CSS syntax, inline images, and more ([docs](https://github.com/postcss/postcss))
+- **postcss-loader:** A webpack loader to process CSS with PostCSS ([docs](https://webpack.js.org/loaders/postcss-loader/))
+- **autoprefixer:** Parses CSS files adding vendor prefixes to CSS rules so you can forget and write normal CSS ([docs](https://css-tricks.com/autoprefixer/))
+- **postcss-import:** Offers the ability to organize your CSS into multiple files and combine them at build time by processing @import statements in advance ([docs](https://github.com/postcss/postcss-import))
 
-> 📝 **_NOTE:_** In the webpack configuration we will be using `css-loader` ([docs](https://webpack.js.org/loaders/css-loader/)) too although there is no need to import it on our project since it was importes as a dependency by `vue-loader`
-
-#### Related webpack configuration
+### Related webpack configuration
 
 Aside from the `webpack.config.js` file, we will create the postcss configuration inside the `postcss.config.js` file. The first thing is to call this loader from our webpack file:
 
@@ -208,14 +208,15 @@ module.exports = {
 
 ```js
 module.exports = {
-    plugins: [
-        require('tailwindcss')('./tailwind.config.js'),
-        require('autoprefixer'),
-    ],
-  }
+  plugins: [
+    require("postcss-import"),
+    require("tailwindcss"),
+    require("autoprefixer"),
+  ],
+};
 ```
 
-#### Configuring tailwind
+### Configuring tailwind
 
 In order to integrate tailwind there are additional steps to take, first of all we will initialize its configuration file:
 
@@ -233,28 +234,9 @@ This will create the `tailwind.config.js` file. Next we need to create a css fil
 
 Finally this needs to be imported from our `main.js` file, in this case using the line `import './css/tailwind.css';`
 
+> 📝 **_NOTE:_** PurgeCSS is not needed with Tailwind 3 since it uses a new engine that generates only the styles you need. ([docs](https://github.com/tailwindlabs/tailwindcss/issues/7203))
 
-#### Configuring tailwind's purgeCSS
-
-In order to configure purgeCSS, we will use the built in system tailwind comes with. To enable it we just need to modify the `tailwind.config.js` file to add the `purge` key. In there we will configure the files this module needs to look to purge the resulting css file (all the js, and html files):
-
-```js
-module.exports = {
-  purge: {
-    content: [
-      './src/**/*.html',
-      './src/**/*.vue',
-      './src/*.js',
-      './src/*.vue',
-    ]
-  },
-  //other configuration
-}
-```
-
-> 📝 **_NOTE:_** PurgeCSS will not run when we are in development mode. This allows to have shorter build times and allows to tweak the code from the developer console using new classes. This is controlled through the `process.env.NODE_ENV` variable, that is set in our `package.json` through the `--node-env` flag ([more info](https://github.com/webpack/webpack-cli/issues/2362)).
-
-### Setting up a webpack dev server
+## Setting up a webpack dev server
 
 To test our builds we will set up a simple server used to test our project locally ([docs](https://webpack.js.org/configuration/dev-server/))
 
@@ -262,16 +244,19 @@ To test our builds we will set up a simple server used to test our project local
 npm install -D webpack-dev-server
 ```
 
-#### Related webpack configuration
+### Related webpack configuration
 
 In order to use the development server, we first need to configure a few fields:
 
 - **entry:** This defines the entry point for our webpack process ([docs](https://webpack.js.org/concepts/entry-points/#single-entry-shorthand-syntax))
 - **devtool:** This option if and how source maps are generated ([docs](https://webpack.js.org/configuration/devtool/)). They are useful for debugging once a bug is reproduced in a production environment, but will slow down build times.
 - **devServer:** The devServer configuration
-  - **watchContentBase:** When enabled, it will look for changes on the `entry` file and its dependencies and will trigger a full page reload if it finds any
   - **open:** Tells dev-server to open the browser after server had been started.
-  - **writeToDisk:** Tells devServer to write generated assets to the disk.
+  - **devMiddleware:** Provide options to webpack-dev-middleware which handles webpack assets.
+    - **writeToDisk:** Tells devServer to write generated assets to the disk.
+  - **static:** This option allows configuring options for serving static files from the directory
+    - **watch:** When enabled, it will look for changes on the `entry` file and its dependencies and will trigger a full page reload if it finds any
+
 
 ```js
 const path = require('path')
@@ -279,14 +264,18 @@ const path = require('path')
 module.exports = {
     entry: path.join(__dirname, 'src/main.js'),
     devServer: {
-        watchContentBase: true,
         open: true,
-        writeToDisk: true,
+        devMiddleware: {
+            writeToDisk: true,
+        },
+        static: {
+            watch: true,
+        },
     },
 }
 ```
 
-### Setting up MiniCssExtractPlugin
+## Setting up MiniCssExtractPlugin
 
 This plugin extracts all our styles into separate `.css` files, one for each `.js` file in our application. In our case this will only generate a sinlge `.css` file from our `main.js` file ([docs](https://webpack.js.org/plugins/mini-css-extract-plugin/)). To install we run:
 
@@ -294,7 +283,7 @@ This plugin extracts all our styles into separate `.css` files, one for each `.j
 npm install -D mini-css-extract-plugin
 ```
 
-#### Related webpack configuration
+### Related webpack configuration
 
 Once installed, we only need to configure it on our `webpack.config.js` file:
 
@@ -328,15 +317,15 @@ module.exports = {
 }
 ```
 
-### Setting up CssMinimizerPlugin
+## Setting up CssMinimizerPlugin
 
-Even though or styles files are not huge after using PurgeCSS, we can cut them in half what's left by just minifying their contents. To start first we need to install the dependency ([docs](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/)):
+Even though or styles files are not huge, we can cut them in half of what's left by just minifying their contents. To start first we need to install the dependency ([docs](https://webpack.js.org/plugins/css-minimizer-webpack-plugin/)):
 
 ```shell
 npm install -D mini-css-extract-plugin
 ```
 
-#### Related webpack configuration
+### Related webpack configuration
 
 Following the docs above we only need to configure the CssMinimizerPlugin as an additional optimization step:
 
@@ -376,7 +365,7 @@ module.exports = {
 
 > 📝 **_NOTE:_** In the docs you can see the `minimize: true` option. This is also set depending on whether you are running in development or productio mode. In this project, the mode is defined through the `--mode` flag on the `package.json` commands and there is no need to include the `minimize` option.
 
-### Setting up FontAwesome for our icons
+## Setting up FontAwesome for our icons
 
 We will add a few icons to our interface too. To do so the choice is `fontawesome` since it has a nice support for Tree Shaking ([docs](https://fontawesome.com/how-to-use/javascript-api/other/tree-shaking)) as well as a package for vue specifically called `vue-fontawesome`. To get started:
 
@@ -391,30 +380,32 @@ npm install -D @fortawesome/fontawesome-svg-core @fortawesome/vue-fontawesome@la
 
 > 📝 **_NOTE:_** In this case we will work with the *free* icons of font awesome, you can find how to import the solid, regular, brand or **pro** icons on the `"add more styles or pro icons"` section in the [docs](https://github.com/FortAwesome/vue-fontawesome#add-more-styles-or-pro-icons)
 
-#### Configuring font awesome
+> 📝 **_NOTE:_** If the default fontawesome import is still for versions 2.x of vue, use `npm i -D @fortawesome/vue-fontawesome@prerelease`
 
-We want to import the needed icons on each component instead of importing them all globally. To do so we will add the following lines on our `main.js` file:
+### Configuring font awesome
+
+We want to import the needed icons on each component instead of importing them all globally. To do so we will add the following lines on our `main.js` file to import the dependency and register the component:
 
 ```js
+...
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
+...
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.prototype.$library = library
+const app = createApp(App)
+  .component("font-awesome-icon", FontAwesomeIcon)
+  .mount("#app");
 ```
 
-First we import the dependencies needed to set up our vue component and our library. The component is created globally to make it accessible everywhere and the library will be made available creating a new instance property ([docs](https://vuejs.org/v2/cookbook/adding-instance-properties.html)).
-
-Once both of these elements are set up, whenever we want to use an icon first we will import it to our component, then add them to the library and finally use them in our template, for example:
+Once the library is imported and the component registered, whenever we want to use an icon first we will import the icon, the library and then add the icon to the library and finally use them in our template, for example:
 
 ```js
 <script>
 import { faAddressBook } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
 
 export default {
   beforeCreate() {
-    this.$library.add(faAddressBook);
+    library.add(faAddressBook);
   },
 };
 </script>
@@ -430,21 +421,19 @@ export default {
 
 > 📝 **_NOTE:_** There are two things to look our for when using fontAwesome. The first thins is that, while the import name is in `camelCase`, the element itself will use `kebab-case`. The second thing is that you need to make sure that you are using the right prefix (fas for solid, far for regular and fab for brands).
 
-### Setting up dark mode with Tailwind.css
+## Setting up dark mode with Tailwind.css
 
 Dark mode support comes built-in with `Tailwind.css` making things much easier to set up ([docs](https://tailwindcss.com/docs/dark-mode)). This mode is disabled by default in order to keep the size at a minimum and needs to be enabled on the `tailwind.config.js` file by setting the `darkMode` option:
 
 `tailwind.config.js`
 ```js
 module.exports = {
-  purge: {
-    content: [
-      './src/**/*.html',
-      './src/**/*.vue',
-      './src/*.js',
-      './src/*.vue',
-    ]
-  },
+  content: [
+    './src/**/*.html',
+    './src/**/*.vue',
+    './src/*.js',
+    './src/*.vue',
+  ],
   darkMode: 'class', // or 'media' or false
   theme: {
     extend: {},
@@ -472,11 +461,11 @@ Since we want to toggle the dark mode manually through the use of a class we wil
 
 Using this approach, we will receive an event from the `Sidebar.vue` component (where the moon button is) that will toggle the `isDarkModeActive` variable to activate the `dark` class conditionally, applying the styles on all the page accordingly.
 
-### Troubleshooting
+## Troubleshooting
 
 If you are finding any trouble with this project, you can try one of the following methods to try and solve any issues you may be facing:
 
-#### Upgrade version
+### Upgrade version
 
 Having older versions of NPM and node may throw errors. This project has been tested with the following minimum verions ([ref](https://github.com/Aridez/vue-tailwind-webpack-boilerplate/issues/34)):
 
@@ -485,6 +474,6 @@ Having older versions of NPM and node may throw errors. This project has been te
 
 If your project works with previous of Node or NPM [open an issue](https://github.com/Aridez/vue-tailwind-webpack-boilerplate/issues) to fix this section.
 
-### Other
+## Other
 
 - [Layout by iaminos](https://tailwindcomponents.com/component/messages-ui-layout)
